@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOX VIEW - شبكة 3x4 حديثة</title>
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  text-align: center;
+  padding: 20px;
+}
+
+/* واجهة الترحيب */
+header{
+  background-color:black;
+  color:white;
+  padding:25px;
+  font-size:28px;
+  font-weight:bold;
+  border-radius:10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  margin-bottom:25px;
+}
+
+/* الشبكة */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:15px;
+  margin-bottom:30px;
+}
+
+.card{
+  background:white;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  overflow:hidden;
+  cursor:pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover{
+  transform: translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+.card img{
+  width:100%;
+  display:block;
+}
+.card p{
+  padding:10px 0;
+  font-weight:bold;
+  color:#495057;
+  background:#f1f3f5;
+}
+
+/* نافذة الفيديو */
+.modal{
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.7);
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+.modal-content{
+  background:white;
+  border-radius:10px;
+  max-width:90%;
+  max-height:80%;
+  overflow:hidden;
+  position:relative;
+  padding:10px;
+}
+.modal video{
+  width:100%;
+  height:auto;
+}
+.close-btn{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:24px;
+  font-weight:bold;
+  color:#212529;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<header>BOX VIEW</header>
+
+<div class="grid">
+  <div class="card" data-video="https://gcore-vid.xvideos-cdn.com/MX30OupBunHa0dIlZZ5yGw==,1756184278/videos/mp4/0/d/a/xvideos.com_0dae24f51a72caccbdccb3b4bca0491d.mp4">
+    <img src="https://picsum.photos/seed/1/400" alt="ليلى">
+    <p>ليلى</p>
+  </div>
+  <div class="card" data-video="https://cdn77-vid-mp4.xvideos-cdn.com/c9leq7-9vS1hWAbjm_m6dA==,1756184240/videos/mp4/2/b/1/xvideos.com_2b142bc47e54fc4a7c98474c614ac316.mp4?ui=MTkzLjM0Ljc1LjQyLS0vdmlkZW8ua2xidWhrZmNhYTIvYm9vYnM=">
+    <img src="https://picsum.photos/seed/2/400" alt="سارة">
+    <p>سارة</p>
+  </div>
+  <div class="card" data-video="https://cdn77-vid-mp4.xvideos-cdn.com/zaNClmdmNfYRHyDmNeHk2A==,1756184213/videos/mp4/a/9/7/xvideos.com_a97ce7911b8b397523b75a35dd52c55c.mp4?ui=NjQuNDMuMTExLjg0LS0vdmlkZW8ua2lpdmJidmM1ZjUvY2h1YmJ5X2Jid18=">
+    <img src="https://picsum.photos/seed/3/400" alt="نور">
+    <p>نور</p>
+  </div>
+  <div class="card" data-video="https://cdn77-vid-mp4.xvideos-cdn.com/_XS74nBI_Rsjhunpq7OtmA==,1756184180/videos/mp4/b/f/3/xvideos.com_bf315a6e8eaacf3fd3aedb8b9c82d89a.mp4?ui=MTkxLjEwMi4xNTUuMTkwLS0vdmlkZW8uaHZ1dmJjbTI0Njkvc2V4eV90ZWVuX2I=">
+    <img src="https://picsum.photos/seed/4/400" alt="جميلة">
+    <p>جميلة</p>
+  </div>
+  <div class="card" data-video="https://www.w3schools.com/html/mov_bbb.mp4">
+    <img src="https://picsum.photos/seed/5/400" alt="منى">
+    <p>منى</p>
+  </div>
+  <div class="card" data-video="https://cdn77-vid-mp4.xvideos-cdn.com/droZFOsKMo-IzAJIAJzzEg==,1756183927/videos/mp4/a/9/5/xvideos.com_a95d74950a8b9e75430937957436655f.mp4?ui=MTg2LjE3OS4xNC4yMTUtLS92aWRlby51aHVha2NoYmFlZi9tYXJpYWFsZV93ZQ==">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyaaNv4IXWpj2DnRQ417wddbLcs8GMjvJpzg&s" alt="هالة">
+    <p>هالة</p>
+  </div>
+  <div class="card" data-video="https://www.w3schools.com/html/mov_bbb.mp4">
+    <img src="https://picsum.photos/seed/7/400" alt="رانيا">
+    <p>رانيا</p>
+  </div>
+  <div class="card" data-video="https://www.w3schools.com/html/movie.mp4">
+    <img src="https://picsum.photos/seed/8/400" alt="ياسمين">
+    <p>ياسمين</p>
+  </div>
+  <div class="card" data-video="https://www.w3schools.com/html/mov_bbb.mp4">
+    <img src="https://picsum.photos/seed/9/400" alt="ليان">
+    <p>ليان</p>
+  </div>
+  <div class="card" data-video="https://www.w3schools.com/html/movie.mp4">
+    <img src="https://picsum.photos/seed/10/400" alt="دانية">
+    <p>دانية</p>
+  </div>
+  <div class="card" data-video="https://www.w3schools.com/html/mov_bbb.mp4">
+    <img src="https://picsum.photos/seed/11/400" alt="رنا">
+    <p>رنا</p>
+  </div>
+  <div class="card" data-video="https://www.w3schools.com/html/movie.mp4">
+    <img src="https://picsum.photos/seed/12/400" alt="تاليا">
+    <p>تاليا</p>
+  </div>
+</div>
+
+<!-- نافذة الفيديو -->
+<div class="modal" id="videoModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <video id="videoPlayer" controls></video>
+  </div>
+</div>
+
+<script>
+const cards = document.querySelectorAll('.card');
+const modal = document.getElementById('videoModal');
+const videoPlayer = document.getElementById('videoPlayer');
+const closeBtn = document.getElementById('closeModal');
+
+cards.forEach(card=>{
+  card.addEventListener('click', ()=>{
+    const src = card.getAttribute('data-video');
+    videoPlayer.src = src;
+    modal.style.display = 'flex';
+    videoPlayer.play();
+  });
+});
+
+closeBtn.addEventListener('click', ()=>{
+  videoPlayer.pause();
+  modal.style.display = 'none';
+});
+
+window.addEventListener('click', e=>{
+  if(e.target == modal){
+    videoPlayer.pause();
+    modal.style.display = 'none';
+  }
+});
+</script>
+
+</body>
+</html>
